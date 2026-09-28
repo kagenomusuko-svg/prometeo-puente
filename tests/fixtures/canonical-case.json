@@ -150,46 +150,27 @@
       "reason": "Projection from confirmed model"
     }
   },
-  "caseReduction": {
-    "caseId": "case-canonical-001",
-    "eventCount": 1,
-    "events": [
-      {
-        "id": "event-canonical-001",
-        "caseId": "case-canonical-001",
-        "sequence": 1,
-        "action": "confirm",
-        "objectType": "ConfirmedModel",
-        "objectId": "model-canonical-001",
-        "previousState": "none",
-        "resultingState": "confirmed",
-        "previousVersion": "none",
-        "resultingVersion": "1.0.0",
-        "occurredAt": "2026-09-28T18:02:00Z",
-        "reason": "Confirmación explícita para proyección",
-        "provenance": {
-          "kind": "human",
-          "actorId": "analyst-canonical-001",
-          "recordedAt": "2026-09-28T18:02:00Z",
-          "sourceObjectId": "decision-canonical-001",
-          "sourceVersion": "none"
-        }
-      }
-    ],
-    "objects": {
-      "ConfirmedModel:model-canonical-001": {
-        "objectType": "ConfirmedModel",
-        "objectId": "model-canonical-001",
-        "previousObjectId": null,
-        "state": "confirmed",
-        "version": "1.0.0",
-        "lastEventId": "event-canonical-001"
-      }
-    },
-    "lastEvent": {
+  "caseEvents": [
+    {
       "id": "event-canonical-001",
       "caseId": "case-canonical-001",
-      "sequence": 1
+      "sequence": 1,
+      "action": "confirm",
+      "objectType": "ConfirmedModel",
+      "objectId": "model-canonical-001",
+      "previousState": "none",
+      "resultingState": "confirmed",
+      "previousVersion": "none",
+      "resultingVersion": "1.0.0",
+      "occurredAt": "2026-09-28T18:02:00Z",
+      "reason": "Confirmación explícita para proyección",
+      "provenance": {
+        "kind": "human",
+        "actorId": "analyst-canonical-001",
+        "recordedAt": "2026-09-28T18:02:00Z",
+        "sourceObjectId": "decision-canonical-001",
+        "sourceVersion": "none"
+      }
     }
-  }
+  ]
 }

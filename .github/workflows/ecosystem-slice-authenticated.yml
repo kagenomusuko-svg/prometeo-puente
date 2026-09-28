@@ -19,6 +19,14 @@ jobs:
           ref: 0ecc97612efe9a0bd67a3edfeb7733e721a30597
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeoinforme
+      - name: Checkout caso fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-caso
+          ref: a25f7e157469fe77bb9d0e946f6dfb588bcad230
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeocaso
+
       - name: Checkout proyección fijada
         uses: actions/checkout@v4
         with:
@@ -61,6 +69,7 @@ jobs:
       - name: Execute full vertical slice
         env:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
+          PROMETEO_CASO_PATH: ${{ github.workspace }}/prometeocaso/src/aggregate.mjs
           PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
           PROMETEO_MOTOR_URL: http://127.0.0.1:8000/calculate
         run: npm run vertical-slice

@@ -23,7 +23,7 @@ const reportInput = {
   motorResult: adapted.motorResult,
   calculationTrace: adapted.calculationTrace,
   contextReferences: chain.languageProposal.contextReferences,
-  caseReduction: chain.caseReduction,
+  caseEvents: chain.caseEvents,
 };
 
 assert.equal(contractReference.contractId, "prometeo-contracts");
@@ -41,20 +41,20 @@ assert.deepEqual(reportInput.motorResult.result, legacyResponse.result);
 assert.equal(reportInput.motorResult.traceId, reportInput.calculationTrace.id);
 assert.equal(reportInput.calculationTrace.steps.length, legacyResponse.trace.length);
 assert.equal(adapted.externalMetadata.taxonomy_id, "universal");
-assert.equal(reportInput.caseReduction.eventCount, 1);
-assert.equal(reportInput.caseReduction.lastEvent.id, "event-canonical-001");
-
-if (process.env.PROMETEO_INFORME_PATH) {
+assert.equal(reportInput.caseEvents.length, 1);
+if (process.env.PROMETEO_INFORME_PATH && process.env.PROMETEO_CASO_PATH) {
   const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
+  const { reconstructCaseAggregate } = await import(pathToFileURL(process.env.PROMETEO_CASO_PATH).href);
   const report = buildReport({
     ...reportInput,
+    caseReduction: reconstructCaseAggregate(chain.caseEvents),
     generatedAt: "2026-09-28T18:36:00Z",
     generatedBy: "prometeo-informe",
   });
   const audit = report.sections.find((section) => section.id === "case-audit");
   assert.equal(audit.type, "case-event-log");
-  assert.equal(audit.value.eventCount, reportInput.caseReduction.eventCount);
-  assert.equal(audit.value.lastEvent.id, reportInput.caseReduction.lastEvent.id);
+  assert.equal(audit.value.eventCount, reportInput.caseEvents.length);
+  assert.equal(audit.value.lastEvent.id, reportInput.caseEvents.at(-1).id);
   console.log("PASS: caso canónico completo hasta ReportModel con auditoría del expediente");
 } else {
   console.log("PASS: caso canónico completo hasta entrada de informe con auditoría del expediente");

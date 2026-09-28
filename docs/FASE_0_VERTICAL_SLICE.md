@@ -34,3 +34,6 @@ La ejecución HTTP contra api/server.py del repositorio prometeo-motor-calculo f
 
 
 El caso canónico incorpora el estado reducido del expediente y el puente lo entrega a `prometeo-informe` en la sección `case-audit`.
+
+
+El puente recibe `caseEvents` y delega la reconstrucción a `prometeo-caso`; no transporta un estado reducido preparado manualmente.

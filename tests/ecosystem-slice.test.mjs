@@ -51,7 +51,7 @@ const reportInput = {
   analystDecision: chain.decision,
   confirmedModel: chain.confirmedModel,
   contextReferences: chain.languageProposal.contextReferences,
-  caseReduction: chain.caseReduction,
+  caseEvents: chain.caseEvents,
   motorResult: adapted.motorResult,
   calculationTrace: adapted.calculationTrace,
 };
@@ -60,7 +60,7 @@ assert.equal(reportInput.modelId, chain.confirmedModel.id);
 assert.deepEqual(reportInput.contextReferences, chain.languageProposal.contextReferences);
 assert.equal(reportInput.motorResult.requestId, chain.motorRequest.id);
 assert.equal(reportInput.calculationTrace.requestId, chain.motorRequest.id);
-assert.equal(reportInput.caseReduction.eventCount, 1);
+assert.equal(reportInput.caseEvents.length, 1);
 
 if (process.env.PROMETEO_INFORME_PATH) {
   const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);

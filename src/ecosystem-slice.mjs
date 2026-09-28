@@ -53,6 +53,7 @@ export function runEcosystemSlice({
   motorVersion = "source:prometeo-motor-calculo/motor.py@432ac9578da8862d6605b18071576af02b042bce",
   calculatedAt = "2026-09-28T18:35:00Z",
   generatedAt = "2026-09-28T18:36:00Z",
+  reconstructCaseAggregate = null,
 }) {
   validateChain(chain);
   const legacyRequest = toLegacyCalculateRequest(chain.motorRequest);
@@ -60,6 +61,15 @@ export function runEcosystemSlice({
     motorVersion,
     calculatedAt,
   });
+  const caseReduction = chain.caseEvents
+    ? (reconstructCaseAggregate ? reconstructCaseAggregate(chain.caseEvents) : null)
+    : chain.caseReduction ?? null;
+  if (chain.caseEvents && !caseReduction) {
+    const error = new Error("caseEvents require reconstructCaseAggregate");
+    error.code = "MISSING_CASE_AGGREGATE";
+    throw error;
+  }
+
   const reportInput = {
     caseId: chain.sourceDocument.caseId,
     modelId: chain.confirmedModel.id,
