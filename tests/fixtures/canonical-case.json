@@ -147,7 +147,7 @@
       "sourceObjectId": "model-canonical-001",
       "sourceVersion": "1.0.0",
       "recordedAt": "2026-09-28T18:30:00Z",
-      "reason": "MotorRequest proyectado desde ConfirmedModel confirmado"
+      "reason": "Projection from confirmed model"
     }
   }
 }
