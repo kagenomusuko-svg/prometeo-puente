@@ -26,13 +26,17 @@ npm run ecosystem-slice
 
 Ese comando verifica hasta la entrada del informe cuando no se proporciona un generador externo.
 
-La integración completa se ejecuta en GitHub Actions. El workflow:
+La integración local se ejecuta automáticamente en GitHub Actions y verifica la cadena hasta la entrada del informe.
+
+La construcción completa de `ReportModel` está disponible en un workflow manual autenticado. Requiere el secreto `PROMETEO_READ_TOKEN`, porque los repositorios son privados. Ese workflow:
 
 - obtiene este repositorio;
 - obtiene `prometeo-informe` en el commit `cfc6d00bf87637a3b3864be121490f8a17b2c322`;
 - instala el puente sin dependencia runtime oculta;
 - establece `PROMETEO_INFORME_PATH`;
 - ejecuta la construcción real de `ReportModel`.
+
+La primera ejecución automática del workflow completo quedó bloqueada antes de sus pasos por falta de autorización de lectura cruzada; por ello el hito remoto completo permanece pendiente de configurar ese secreto.
 
 ## Fronteras preservadas
 

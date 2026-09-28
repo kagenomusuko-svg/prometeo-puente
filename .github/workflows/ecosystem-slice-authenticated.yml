@@ -1,0 +1,31 @@
+name: Authenticated ecosystem vertical slice
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout puente
+        uses: actions/checkout@v4
+      - name: Checkout informe fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-informe
+          ref: cfc6d00bf87637a3b3864be121490f8a17b2c322
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeoinforme
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install puente
+        run: npm install
+      - name: Execute full vertical slice
+        env:
+          PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
+        run: npm run ecosystem-slice
