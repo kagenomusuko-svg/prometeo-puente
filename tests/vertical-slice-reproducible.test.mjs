@@ -60,6 +60,9 @@ assert.equal(first.report.caseId, chain.sourceDocument.caseId);
 assert.equal(first.report.modelId, chain.confirmedModel.id);
 assert.deepEqual(first.report.contextReferences, chain.languageProposal.contextReferences);
 assert.deepEqual(first.report.sections.find((section) => section.id === "context").references, first.report.contextReferences);
+assert.equal(first.report.sections.find((section) => section.id === "case-audit").type, "case-event-log");
+assert.equal(first.report.sections.find((section) => section.id === "case-audit").value.eventCount, chain.caseReduction.eventCount);
+assert.equal(first.report.sections.find((section) => section.id === "case-audit").value.lastEvent.id, chain.caseReduction.lastEvent.id);
 assert.deepEqual(first.report.sections.find((section) => section.id === "result").value, first.adapted.motorResult.result);
 assert.deepEqual(first.report, second.report);
 

@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: kagenomusuko-svg/prometeo-informe
-          ref: cfc6d00bf87637a3b3864be121490f8a17b2c322
+          ref: 0ecc97612efe9a0bd67a3edfeb7733e721a30597
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeoinforme
       - name: Checkout proyección fijada
