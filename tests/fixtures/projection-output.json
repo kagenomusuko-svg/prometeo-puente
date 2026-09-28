@@ -1,0 +1,22 @@
+{
+  "id": "request-vertical-001",
+  "modelId": "model-vertical-001",
+  "modelVersion": "1.0.0",
+  "formulaId": "delta",
+  "formulaVersion": "0.1.0",
+  "parameters": {
+    "r_star": ["1", "0"],
+    "alpha": ["0", "0"]
+  },
+  "discipline": "universal",
+  "createdBy": "projection-vertical-001",
+  "createdAt": "2026-09-28T15:30:00Z",
+  "provenance": {
+    "kind": "deterministic-system",
+    "actorId": "projection-vertical-001",
+    "recordedAt": "2026-09-28T15:30:00Z",
+    "sourceObjectId": "model-vertical-001",
+    "sourceVersion": "1.0.0",
+    "reason": "Projection from confirmed model"
+  }
+}
