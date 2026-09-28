@@ -111,8 +111,15 @@
     "decidedBy": "analyst-canonical-001",
     "provenance": {
       "kind": "human",
-      "actorId": "analyst-canonical-001"
-    }
+      "actorId": "analyst-canonical-001",
+      "recordedAt": "2026-09-28T18:02:00Z",
+      "sourceObjectId": "hypothesis-canonical-001",
+      "sourceVersion": "none"
+    },
+    "caseId": "case-canonical-001",
+    "resultingObjectId": "model-canonical-001",
+    "decidedAt": "2026-09-28T18:02:00Z",
+    "reason": "Confirmación explícita para proyección"
   },
   "motorRequest": {
     "id": "request-canonical-001",
