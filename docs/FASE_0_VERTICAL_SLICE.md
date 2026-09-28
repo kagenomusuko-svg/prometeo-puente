@@ -1,37 +1,33 @@
-# Fase 0 — prueba vertical del puente
+# Fase 0 — vertical slice completo
 
-Esta prueba valida la frontera entre los repositorios sin copiar sus implementaciones.
-
-## Cadena cubierta
+El caso canónico de Fase 0 se representa en tests/fixtures/canonical-case.json y conserva esta cadena:
 
 ```text
-salida contractual de prometeo-proyeccion
+SourceDocument
         ↓
-prometeo-puente
+propuestas lingüísticas
         ↓
-solicitud heredada del motor
+decisión humana
         ↓
-respuesta con traza
+ConfirmedModel
         ↓
-MotorResult + CalculationTrace
-```
-
-El archivo `tests/fixtures/projection-output.json` representa exclusivamente la salida contractual de `prometeo-proyeccion`. No vuelve a implementar el proyector.
-
-La función `simulatedMotor` sólo simula la forma de respuesta de `prometeo-motor-calculo`; no calcula una fórmula dentro del puente. La prueba verifica correlación, conservación de exactitud, trazabilidad y metadatos externos.
-
-La llamada HTTP real queda cubierta mediante `src/motor-client.mjs` contra `api/server.py` del repositorio `prometeo-motor-calculo`. La prueba ejecutada el 28 de septiembre de 2026 recorrió:
-
-```text
 MotorRequest
         ↓
-POST /calculate
-        ↓
-api/server.py + motor.py real
+prometeo-motor-calculo
         ↓
 MotorResult + CalculationTrace
         ↓
-ReportModel
+entrada de prometeo-informe
 ```
 
-La ejecución validó la fórmula `delta`, la taxonomía `universal`, la preservación del resultado exacto y la trazabilidad hasta el informe. La versión ejecutada del motor quedó identificada por el blob `432ac9578da8862d6605b18071576af02b042bce`.
+## Responsabilidades verificadas
+
+- ingesta conserva el documento y el fragmento;
+- lenguaje sólo produce objetos proposed;
+- caso registra la decisión humana y el modelo confirmado;
+- proyección entrega un MotorRequest explícito;
+- puente adapta sin calcular;
+- el motor entrega el resultado y la traza;
+- informe recibe los objetos sin reinterpretarlos.
+
+La ejecución HTTP contra api/server.py del repositorio prometeomotorcalculo fue validada por separado con el mismo request y produjo el mismo resultado exacto. Esta prueba contractual usa un fixture de respuesta para mantener el test determinista y aislado del despliegue.

@@ -1,0 +1,29 @@
+{
+  "formula": "delta",
+  "inputs": {
+    "r_star": ["1", "0"],
+    "alpha": ["0", "0"]
+  },
+  "result": [
+    {"numerator": 1, "denominator": 1},
+    {"numerator": 0, "denominator": 1}
+  ],
+  "trace": [
+    {
+      "step": 1,
+      "operation": "subtract",
+      "formula": "delta",
+      "inputs": {"a": "1", "b": "0"},
+      "result": {"numerator": 1, "denominator": 1}
+    },
+    {
+      "step": 2,
+      "operation": "subtract",
+      "formula": "delta",
+      "inputs": {"a": "0", "b": "0"},
+      "result": {"numerator": 0, "denominator": 1}
+    }
+  ],
+  "taxonomy_id": "universal",
+  "taxonomy_name": "Universal"
+}
