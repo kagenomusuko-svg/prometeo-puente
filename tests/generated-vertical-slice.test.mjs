@@ -105,7 +105,7 @@ const motorRequest = projectConfirmedModel({
   createdBy: "prometeo-proyeccion",
   createdAt: "2026-09-28T21:03:00Z",
 });
-const legacyResponse = { result: [{ numerator: 1, denominator: 1 }, { numerator: 0, denominator: 1 }], trace: [{ step: "delta", result: [{ numerator: 1, denominator: 1 }, { numerator: 0, denominator: 1 }] }], metadata: { taxonomy_id: "universal" } };
+const legacyResponse = { formula: "delta", inputs: { r_star: ["1", "0"], alpha: ["0", "0"] }, result: [{ numerator: 1, denominator: 1 }, { numerator: 0, denominator: 1 }], trace: [{ step: "delta", result: [{ numerator: 1, denominator: 1 }, { numerator: 0, denominator: 1 }] }], taxonomy_id: "universal", taxonomy_name: "Universal" };
 const result = runEcosystemSlice({
   chain: { sourceDocument, languageProposal, decision, confirmedModel, motorRequest, caseEvents },
   legacyResponse,
