@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
 import { runEcosystemSlice } from "../src/ecosystem-slice.mjs";
 
-const required = ["PROMETEO_CONTEXTO_PATH", "PROMETEO_LENGUAJE_PATH", "PROMETEO_CASO_CONFIRMATION_PATH", "PROMETEO_CASO_TRANSITION_PATH", "PROMETEO_CASO_STORE_PATH", "PROMETEO_CASO_AGGREGATE_PATH", "PROMETEO_INFORME_PATH", "PROMETEO_PROYECCION_PATH"];
+const required = ["PROMETEO_INGESTA_PATH", "PROMETEO_CONTEXTO_PATH", "PROMETEO_LENGUAJE_PATH", "PROMETEO_CASO_CONFIRMATION_PATH", "PROMETEO_CASO_TRANSITION_PATH", "PROMETEO_CASO_STORE_PATH", "PROMETEO_CASO_AGGREGATE_PATH", "PROMETEO_INFORME_PATH", "PROMETEO_PROYECCION_PATH"];
 for (const name of required) if (!process.env[name]) throw new Error(name + " es obligatorio para el slice generativo");
 
 const { queryParadigma } = await import(pathToFileURL(process.env.PROMETEO_CONTEXTO_PATH).href);
@@ -14,12 +14,13 @@ const { reconstructCaseAggregate } = await import(pathToFileURL(process.env.PROM
 const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
 const { projectConfirmedModel } = await import(pathToFileURL(process.env.PROMETEO_PROYECCION_PATH).href);
 
-const sourceDocument = {
+const { normalizeTextDocument } = await import(pathToFileURL(process.env.PROMETEO_INGESTA_PATH).href);
+const sourceDocument = normalizeTextDocument({
   id: "document-generated-001",
   caseId: "case-generated-001",
-  state: "normalized",
-  fragments: [{ id: "fragment-generated-001", text: "A realizó X y se reporta Y.", provenance: { kind: "source", actorId: "prometeo-ingesta" } }],
-};
+  text: "A realizó X y se reporta Y.",
+  recordedAt: "2026-09-28T20:59:00Z",
+});
 const context = queryParadigma({
   mapDocument: {
     map_version: "f1-generated",
@@ -35,7 +36,7 @@ const context = queryParadigma({
 const languageProposal = registerLanguageProposals({
   document: sourceDocument,
   context,
-  propositions: [{ id: "proposition-generated-001", fragmentId: "fragment-generated-001", text: "A realizó X y se reporta Y.", modality: "reported" }],
+  propositions: [{ id: "proposition-generated-001", fragmentId: "document-generated-001:fragment:1", text: "A realizó X y se reporta Y.", modality: "reported" }],
   candidates: [{ id: "candidate-generated-001", propositionId: "proposition-generated-001", category: "relation", label: "X podría relacionarse con Y" }],
   hypotheses: [{ id: "hypothesis-generated-001", caseId: sourceDocument.caseId, label: "H1", candidateIds: ["candidate-generated-001"] }],
   recordedAt: "2026-09-28T21:01:00Z",

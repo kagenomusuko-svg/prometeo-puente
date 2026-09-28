@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout puente
         uses: actions/checkout@v4
-      - name: Checkout contexto fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-contexto\n          ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeocontexto\n      - name: Checkout lenguaje fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-lenguaje\n          ref: 181249d721199ddafe495677a46bc01d6cc05b0f\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeolenguaje\n      - name: Checkout informe fijado
+      - name: Checkout ingesta fijada\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-ingesta\n          ref: a6d887aa6e879573281b46ff60df420f0c6a53c9\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeoingesta\n      - name: Checkout contexto fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-contexto\n          ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeocontexto\n      - name: Checkout lenguaje fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-lenguaje\n          ref: 181249d721199ddafe495677a46bc01d6cc05b0f\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeolenguaje\n      - name: Checkout informe fijado
         uses: actions/checkout@v4
         with:
           repository: kagenomusuko-svg/prometeo-informe
@@ -76,7 +76,7 @@ jobs:
 
       - name: Execute generated vertical slice
         env:
-          PROMETEO_CONTEXTO_PATH: ${{ github.workspace }}/prometeocontexto/src/query.mjs
+          PROMETEO_INGESTA_PATH: ${{ github.workspace }}/prometeoingesta/src/normalize.mjs\n          PROMETEO_CONTEXTO_PATH: ${{ github.workspace }}/prometeocontexto/src/query.mjs
           PROMETEO_LENGUAJE_PATH: ${{ github.workspace }}/prometeolenguaje/src/proposals.mjs
           PROMETEO_CASO_CONFIRMATION_PATH: ${{ github.workspace }}/prometeocaso/src/confirmation.mjs
           PROMETEO_CASO_TRANSITION_PATH: ${{ github.workspace }}/prometeocaso/src/transition.mjs

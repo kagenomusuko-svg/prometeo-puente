@@ -42,3 +42,6 @@ El puente recibe `caseEvents` y delega la reconstrucción a `prometeo-caso`; no 
 ## Slice generativo
 
 `generated-vertical-slice.test.mjs` construye el caso desde cero: registra la propuesta lingüística, aplica una decisión humana mediante `prometeo-caso`, persiste los eventos en el event store, proyecta el modelo confirmado y ejecuta el informe. El caso canónico deja de ser la única evidencia del recorrido completo.
+
+
+El slice generativo obtiene `SourceDocument` mediante `normalizeTextDocument` de `prometeo-ingesta`; la prueba ya no construye manualmente sus fragmentos.
