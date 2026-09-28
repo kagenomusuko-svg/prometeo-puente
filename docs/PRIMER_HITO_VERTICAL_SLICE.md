@@ -36,7 +36,7 @@ La construcción completa de `ReportModel` está disponible en un workflow manua
 - establece `PROMETEO_INFORME_PATH`;
 - ejecuta la construcción real de `ReportModel`.
 
-La primera ejecución automática del workflow completo quedó bloqueada antes de sus pasos por falta de autorización de lectura cruzada; por ello el hito remoto completo permanece pendiente de configurar ese secreto.
+Las ejecuciones remotas observadas de Actions quedaron en `failure` antes de iniciar pasos y no exponen logs ni steps. Esto impide atribuir el resultado al código del slice: queda pendiente habilitar la ejecución de Actions/runners del repositorio. Además, la integración completa requiere `PROMETEO_READ_TOKEN` para leer el repositorio privado de informe. Por ahora, el resultado verificable es la ejecución local completa.
 
 ## Fronteras preservadas
 
