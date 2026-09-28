@@ -1,5 +1,7 @@
 import {fromLegacyCalculateResponse,toLegacyCalculateRequest,BridgeError} from "./motor-adapter.mjs";
 
+export {BridgeError};
+
 function baseUrl(value) {
   if (typeof value !== "string" || value.length === 0) {
     throw new BridgeError("MISSING_BASE_URL", "baseUrl must be a non-empty string");
