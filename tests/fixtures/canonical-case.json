@@ -97,7 +97,9 @@
     ],
     "provenance": {
       "kind": "human",
-      "actorId": "analyst-canonical-001"
+      "actorId": "analyst-canonical-001",
+      "sourceObjectId": "decision-canonical-001",
+      "sourceVersion": "1.0.0"
     }
   },
   "decision": {
