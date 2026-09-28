@@ -20,4 +20,18 @@ El archivo `tests/fixtures/projection-output.json` representa exclusivamente la 
 
 La función `simulatedMotor` sólo simula la forma de respuesta de `prometeo-motor-calculo`; no calcula una fórmula dentro del puente. La prueba verifica correlación, conservación de exactitud, trazabilidad y metadatos externos.
 
-La llamada real al motor queda pendiente de integración de transporte. El puente todavía no expone HTTP ni red.
+La llamada HTTP real queda cubierta mediante `src/motor-client.mjs` contra `api/server.py` del repositorio `prometeo-motor-calculo`. La prueba ejecutada el 28 de septiembre de 2026 recorrió:
+
+```text
+MotorRequest
+        ↓
+POST /calculate
+        ↓
+api/server.py + motor.py real
+        ↓
+MotorResult + CalculationTrace
+        ↓
+ReportModel
+```
+
+La ejecución validó la fórmula `delta`, la taxonomía `universal`, la preservación del resultado exacto y la trazabilidad hasta el informe. La versión ejecutada del motor quedó identificada por el blob `432ac9578da8862d6605b18071576af02b042bce`.
