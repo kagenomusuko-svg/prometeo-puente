@@ -7,6 +7,7 @@ import { fromLegacyCalculateResponse, toLegacyCalculateRequest } from "../src/mo
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const chain = JSON.parse(fs.readFileSync(path.join(root, "tests/fixtures/canonical-case.json"), "utf8"));
 const legacyResponse = JSON.parse(fs.readFileSync(path.join(root, "tests/fixtures/legacy-delta-response.json"), "utf8"));
+const contractReference = JSON.parse(fs.readFileSync(path.join(root, "contracts/prometeo-contract.json"), "utf8"));
 
 const legacyRequest = toLegacyCalculateRequest(chain.motorRequest);
 assert.equal(legacyRequest.formula, chain.motorRequest.formulaId);
@@ -24,6 +25,9 @@ const reportInput = {
   contextReferences: chain.languageProposal.contextReferences,
 };
 
+assert.equal(contractReference.contractId, "prometeo-contracts");
+assert.equal(contractReference.contractVersion, "0.2.0");
+assert.equal(contractReference.sourceRepository, "kagenomusuko-svg/prometeo-esquema");
 assert.equal(reportInput.caseId, "case-canonical-001");
 assert.equal(reportInput.contextReferences[0].sourceRef, "kagenomusuko-svg/Paradigma@map-commit");
 assert.equal(reportInput.contextReferences[0].evidenceStatus, "explicit");
