@@ -30,4 +30,4 @@ entrada de prometeo-informe
 - el motor entrega el resultado y la traza;
 - informe recibe los objetos sin reinterpretarlos.
 
-La ejecución HTTP contra api/server.py del repositorio prometeomotorcalculo fue validada por separado con el mismo request y produjo el mismo resultado exacto. Esta prueba contractual usa un fixture de respuesta para mantener el test determinista y aislado del despliegue.
+La ejecución HTTP contra api/server.py del repositorio prometeo-motor-calculo fue validada por separado con el mismo request y produjo el mismo resultado exacto. Esta prueba contractual usa un fixture de respuesta para mantener el test determinista y aislado del despliegue.
