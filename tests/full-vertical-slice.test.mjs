@@ -21,9 +21,12 @@ const reportInput = {
   modelId: chain.confirmedModel.id,
   motorResult: adapted.motorResult,
   calculationTrace: adapted.calculationTrace,
+  contextReferences: chain.languageProposal.contextReferences,
 };
 
 assert.equal(reportInput.caseId, "case-canonical-001");
+assert.equal(reportInput.contextReferences[0].sourceRef, "kagenomusuko-svg/Paradigma@map-commit");
+assert.equal(reportInput.contextReferences[0].evidenceStatus, "explicit");
 assert.equal(reportInput.modelId, chain.motorRequest.modelId);
 assert.equal(reportInput.motorResult.requestId, chain.motorRequest.id);
 assert.deepEqual(reportInput.motorResult.result, legacyResponse.result);

@@ -28,6 +28,6 @@ entrada de prometeo-informe
 - proyección entrega un MotorRequest explícito;
 - puente adapta sin calcular;
 - el motor entrega el resultado y la traza;
-- informe recibe los objetos sin reinterpretarlos.
+- contexto consultado llega como referencia separada;\n- informe recibe los objetos sin reinterpretarlos.
 
 La ejecución HTTP contra api/server.py del repositorio prometeo-motor-calculo fue validada por separado con el mismo request y produjo el mismo resultado exacto. Esta prueba contractual usa un fixture de respuesta para mantener el test determinista y aislado del despliegue.
