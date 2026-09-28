@@ -1,0 +1,128 @@
+{
+  "sourceDocument": {
+    "id": "document-canonical-001",
+    "caseId": "case-canonical-001",
+    "state": "normalized",
+    "fragments": [
+      {
+        "id": "document-canonical-001:fragment:1",
+        "text": "A realizó X y se reporta un resultado Y.",
+        "provenance": {
+          "kind": "source",
+          "actorId": "prometeo-ingesta"
+        }
+      }
+    ]
+  },
+  "languageProposal": {
+    "documentId": "document-canonical-001",
+    "propositions": [
+      {
+        "id": "proposition-canonical-001",
+        "fragmentId": "document-canonical-001:fragment:1",
+        "text": "A realizó X y se reporta un resultado Y.",
+        "modality": "reported",
+        "state": "proposed",
+        "provenance": {
+          "kind": "language-agent",
+          "actorId": "prometeo-lenguaje"
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "id": "candidate-canonical-001",
+        "propositionId": "proposition-canonical-001",
+        "category": "relation",
+        "label": "X podría relacionarse con Y",
+        "state": "proposed",
+        "provenance": {
+          "kind": "language-agent",
+          "actorId": "prometeo-lenguaje"
+        }
+      }
+    ],
+    "hypotheses": [
+      {
+        "id": "hypothesis-canonical-001",
+        "caseId": "case-canonical-001",
+        "label": "H1",
+        "candidateIds": [
+          "candidate-canonical-001"
+        ],
+        "status": "proposed",
+        "provenance": {
+          "kind": "language-agent",
+          "actorId": "prometeo-lenguaje"
+        }
+      }
+    ],
+    "requiresHumanConfirmation": true
+  },
+  "confirmedModel": {
+    "id": "model-canonical-001",
+    "caseId": "case-canonical-001",
+    "version": "1.0.0",
+    "state": "confirmed",
+    "nodes": [
+      {
+        "id": "A"
+      },
+      {
+        "id": "Y"
+      }
+    ],
+    "relations": [
+      {
+        "from": "A",
+        "to": "Y",
+        "type": "confirmed"
+      }
+    ],
+    "decisions": [
+      "decision-canonical-001"
+    ],
+    "provenance": {
+      "kind": "human",
+      "actorId": "analyst-canonical-001"
+    }
+  },
+  "decision": {
+    "id": "decision-canonical-001",
+    "action": "confirm",
+    "targetObjectId": "hypothesis-canonical-001",
+    "previousVersion": "none",
+    "resultingVersion": "1.0.0",
+    "decidedBy": "analyst-canonical-001",
+    "provenance": {
+      "kind": "human",
+      "actorId": "analyst-canonical-001"
+    }
+  },
+  "motorRequest": {
+    "id": "request-canonical-001",
+    "modelId": "model-canonical-001",
+    "modelVersion": "1.0.0",
+    "formulaId": "delta",
+    "formulaVersion": "0.1.0",
+    "parameters": {
+      "r_star": [
+        "1",
+        "0"
+      ],
+      "alpha": [
+        "0",
+        "0"
+      ]
+    },
+    "discipline": "universal",
+    "createdBy": "prometeo-proyeccion",
+    "createdAt": "2026-09-28T18:30:00Z",
+    "provenance": {
+      "kind": "deterministic-system",
+      "actorId": "prometeo-proyeccion",
+      "sourceObjectId": "model-canonical-001",
+      "sourceVersion": "1.0.0"
+    }
+  }
+}
