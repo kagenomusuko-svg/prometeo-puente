@@ -57,7 +57,20 @@
         }
       }
     ],
-    "requiresHumanConfirmation": true
+    "requiresHumanConfirmation": true,
+    "contextReferences": [
+      {
+        "id": "node-r-star",
+        "category": "nodes",
+        "locator": {
+          "workId": "metrologia-causal",
+          "section": "R*"
+        },
+        "evidenceStatus": "explicit",
+        "mapVersion": "f1-test",
+        "sourceRef": "kagenomusuko-svg/Paradigma@map-commit"
+      }
+    ]
   },
   "confirmedModel": {
     "id": "model-canonical-001",
