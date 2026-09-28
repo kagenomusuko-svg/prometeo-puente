@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { fromLegacyCalculateResponse, toLegacyCalculateRequest } from "../src/motor-adapter.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -23,6 +23,7 @@ const reportInput = {
   motorResult: adapted.motorResult,
   calculationTrace: adapted.calculationTrace,
   contextReferences: chain.languageProposal.contextReferences,
+  caseReduction: chain.caseReduction,
 };
 
 assert.equal(contractReference.contractId, "prometeo-contracts");
@@ -40,5 +41,21 @@ assert.deepEqual(reportInput.motorResult.result, legacyResponse.result);
 assert.equal(reportInput.motorResult.traceId, reportInput.calculationTrace.id);
 assert.equal(reportInput.calculationTrace.steps.length, legacyResponse.trace.length);
 assert.equal(adapted.externalMetadata.taxonomy_id, "universal");
+assert.equal(reportInput.caseReduction.eventCount, 1);
+assert.equal(reportInput.caseReduction.lastEvent.id, "event-canonical-001");
 
-console.log("PASS: caso canónico completo hasta entrada de informe");
+if (process.env.PROMETEO_INFORME_PATH) {
+  const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
+  const report = buildReport({
+    ...reportInput,
+    generatedAt: "2026-09-28T18:36:00Z",
+    generatedBy: "prometeo-informe",
+  });
+  const audit = report.sections.find((section) => section.id === "case-audit");
+  assert.equal(audit.type, "case-event-log");
+  assert.equal(audit.value.eventCount, reportInput.caseReduction.eventCount);
+  assert.equal(audit.value.lastEvent.id, reportInput.caseReduction.lastEvent.id);
+  console.log("PASS: caso canónico completo hasta ReportModel con auditoría del expediente");
+} else {
+  console.log("PASS: caso canónico completo hasta entrada de informe con auditoría del expediente");
+}
