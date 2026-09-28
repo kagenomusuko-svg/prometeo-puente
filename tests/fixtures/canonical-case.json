@@ -99,7 +99,8 @@
       "kind": "human",
       "actorId": "analyst-canonical-001",
       "sourceObjectId": "decision-canonical-001",
-      "sourceVersion": "1.0.0"
+      "sourceVersion": "1.0.0",
+      "recordedAt": "2026-09-28T18:02:00Z"
     }
   },
   "decision": {
