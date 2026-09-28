@@ -7,7 +7,8 @@
     "test": "node tests/adapter.test.mjs && node tests/vertical-slice.test.mjs && node tests/motor-client.test.mjs && node tests/semantic-chain.test.mjs && node tests/full-vertical-slice.test.mjs && node tests/contract-version.test.mjs && node tests/ecosystem-slice.test.mjs && node tests/contract-compatibility.test.mjs",
     "contract-version": "node tests/contract-version.test.mjs",
     "ecosystem-slice": "node tests/ecosystem-slice.test.mjs",
-    "contract-compatibility": "node tests/contract-compatibility.test.mjs"
+    "contract-compatibility": "node tests/contract-compatibility.test.mjs",
+    "vertical-slice": "node tests/vertical-slice-reproducible.test.mjs"
   },
   "engines": {
     "node": ">=20"

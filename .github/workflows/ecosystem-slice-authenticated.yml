@@ -19,6 +19,14 @@ jobs:
           ref: cfc6d00bf87637a3b3864be121490f8a17b2c322
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeoinforme
+      - name: Checkout proyección fijada
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-proyeccion
+          ref: fbd8ae4efdd9e2c0731d722b7c974fb7b692dc3d
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeoproyeccion
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -28,4 +36,5 @@ jobs:
       - name: Execute full vertical slice
         env:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
-        run: npm run ecosystem-slice
+          PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
+        run: npm run vertical-slice
