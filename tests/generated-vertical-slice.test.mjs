@@ -1,11 +1,8 @@
 import assert from "node:assert/strict";
-import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { runEcosystemSlice } from "../src/ecosystem-slice.mjs";
-import { fromLegacyCalculateResponse } from "../src/motor-adapter.mjs";
-import fs from "node:fs";
 
-const required = ["PROMETEO_CONTEXTO_PATH", "PROMETEO_LENGUAJE_PATH", "PROMETEO_CASO_CONFIRMATION_PATH", "PROMETEO_CASO_TRANSITION_PATH", "PROMETEO_CASO_STORE_PATH", "PROMETEO_INFORME_PATH", "PROMETEO_PROYECCION_PATH"];
+const required = ["PROMETEO_CONTEXTO_PATH", "PROMETEO_LENGUAJE_PATH", "PROMETEO_CASO_CONFIRMATION_PATH", "PROMETEO_CASO_TRANSITION_PATH", "PROMETEO_CASO_STORE_PATH", "PROMETEO_CASO_AGGREGATE_PATH", "PROMETEO_INFORME_PATH", "PROMETEO_PROYECCION_PATH"];
 for (const name of required) if (!process.env[name]) throw new Error(name + " es obligatorio para el slice generativo");
 
 const { queryParadigma } = await import(pathToFileURL(process.env.PROMETEO_CONTEXTO_PATH).href);
@@ -13,6 +10,7 @@ const { registerLanguageProposals } = await import(pathToFileURL(process.env.PRO
 const { confirmModel } = await import(pathToFileURL(process.env.PROMETEO_CASO_CONFIRMATION_PATH).href);
 const { confirmModelTransition } = await import(pathToFileURL(process.env.PROMETEO_CASO_TRANSITION_PATH).href);
 const { createCaseEventStore } = await import(pathToFileURL(process.env.PROMETEO_CASO_STORE_PATH).href);
+const { reconstructCaseAggregate } = await import(pathToFileURL(process.env.PROMETEO_CASO_AGGREGATE_PATH).href);
 const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
 const { projectConfirmedModel } = await import(pathToFileURL(process.env.PROMETEO_PROYECCION_PATH).href);
 
@@ -113,9 +111,7 @@ const result = runEcosystemSlice({
   legacyResponse,
   contract: { contractId: "prometeo-contracts", contractVersion: "0.2.0" },
   buildReport,
-  reconstructCaseAggregate: (events) => {
-    throw new Error("El test generativo requiere el agregado oficial mediante PROMETEO_CASO_AGGREGATE_PATH");
-  },
+  reconstructCaseAggregate,
 });
 assert.equal(result.reportInput.caseId, sourceDocument.caseId);
 assert.equal(result.reportInput.modelId, confirmedModel.id);
