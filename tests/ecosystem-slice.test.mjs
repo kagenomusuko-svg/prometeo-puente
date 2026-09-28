@@ -51,6 +51,7 @@ const reportInput = {
   analystDecision: chain.decision,
   confirmedModel: chain.confirmedModel,
   contextReferences: chain.languageProposal.contextReferences,
+  caseReduction: chain.caseReduction,
   motorResult: adapted.motorResult,
   calculationTrace: adapted.calculationTrace,
 };
