@@ -70,6 +70,7 @@ export function runEcosystemSlice({
     contextReferences: chain.languageProposal.contextReferences,
     motorResult: adapted.motorResult,
     calculationTrace: adapted.calculationTrace,
+    caseReduction: chain.caseReduction ?? null,
   };
   const report = buildReport ? buildReport({
     ...reportInput,

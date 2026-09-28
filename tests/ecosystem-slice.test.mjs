@@ -59,6 +59,7 @@ assert.equal(reportInput.modelId, chain.confirmedModel.id);
 assert.deepEqual(reportInput.contextReferences, chain.languageProposal.contextReferences);
 assert.equal(reportInput.motorResult.requestId, chain.motorRequest.id);
 assert.equal(reportInput.calculationTrace.requestId, chain.motorRequest.id);
+assert.equal(reportInput.caseReduction.eventCount, 1);
 
 if (process.env.PROMETEO_INFORME_PATH) {
   const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
@@ -73,6 +74,7 @@ assert.equal(report.motorResultId, adapted.motorResult.id);
 assert.deepEqual(report.contextReferences, reportInput.contextReferences);
 assert.deepEqual(report.sections.find((section) => section.id === "context").references, report.contextReferences);
 assert.equal(report.sections.find((section) => section.id === "trace").traceId, adapted.calculationTrace.id);
+assert.equal(report.sections.find((section) => section.id === "case-audit").value.eventCount, 1);
 
   console.log("PASS: vertical slice reproducible desde documento hasta ReportModel");
 } else {
