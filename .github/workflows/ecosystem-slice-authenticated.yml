@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout puente
         uses: actions/checkout@v4
-      - name: Checkout informe fijado
+      - name: Checkout contexto fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-contexto\n          ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeocontexto\n      - name: Checkout lenguaje fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-lenguaje\n          ref: 181249d721199ddafe495677a46bc01d6cc05b0f\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeolenguaje\n      - name: Checkout informe fijado
         uses: actions/checkout@v4
         with:
           repository: kagenomusuko-svg/prometeo-informe
@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: kagenomusuko-svg/prometeo-caso
-          ref: fc017d98b9b46d45e62bd03c444e579572091a91
+          ref: 31ef2e4a1d7e8149b83c575b9918455f5e3cab34
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeocaso
 
@@ -73,3 +73,15 @@ jobs:
           PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
           PROMETEO_MOTOR_URL: http://127.0.0.1:8000/calculate
         run: npm run vertical-slice
+
+      - name: Execute generated vertical slice
+        env:
+          PROMETEO_CONTEXTO_PATH: ${{ github.workspace }}/prometeocontexto/src/query.mjs
+          PROMETEO_LENGUAJE_PATH: ${{ github.workspace }}/prometeolenguaje/src/proposals.mjs
+          PROMETEO_CASO_CONFIRMATION_PATH: ${{ github.workspace }}/prometeocaso/src/confirmation.mjs
+          PROMETEO_CASO_TRANSITION_PATH: ${{ github.workspace }}/prometeocaso/src/transition.mjs
+          PROMETEO_CASO_STORE_PATH: ${{ github.workspace }}/prometeocaso/src/event-store.mjs
+          PROMETEO_CASO_AGGREGATE_PATH: ${{ github.workspace }}/prometeocaso/src/aggregate.mjs
+          PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
+          PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
+        run: npm run generated-slice
