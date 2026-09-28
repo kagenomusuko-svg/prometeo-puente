@@ -27,6 +27,9 @@ const reportInput = {
 assert.equal(reportInput.caseId, "case-canonical-001");
 assert.equal(reportInput.contextReferences[0].sourceRef, "kagenomusuko-svg/Paradigma@map-commit");
 assert.equal(reportInput.contextReferences[0].evidenceStatus, "explicit");
+assert.equal(reportInput.contextReferences[0].category, "nodes");
+assert.deepEqual(reportInput.contextReferences[0].locator, { workId: "metrologia-causal", section: "R*" });
+assert.deepEqual(reportInput.contextReferences, chain.languageProposal.contextReferences);
 assert.equal(reportInput.modelId, chain.motorRequest.modelId);
 assert.equal(reportInput.motorResult.requestId, chain.motorRequest.id);
 assert.deepEqual(reportInput.motorResult.result, legacyResponse.result);
