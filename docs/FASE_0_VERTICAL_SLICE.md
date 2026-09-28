@@ -38,3 +38,7 @@ El caso canónico incorpora el estado reducido del expediente y el puente lo ent
 
 El puente recibe `caseEvents` y delega la reconstrucción a `prometeo-caso`; no transporta un estado reducido preparado manualmente.
 \n\nLa prueba reproducible carga los eventos en `createCaseEventStore`, los lee por `caseId` y entrega esa copia al puente antes de reconstruir el agregado.\n
+
+## Slice generativo
+
+`generated-vertical-slice.test.mjs` construye el caso desde cero: registra la propuesta lingüística, aplica una decisión humana mediante `prometeo-caso`, persiste los eventos en el event store, proyecta el modelo confirmado y ejecuta el informe. El caso canónico deja de ser la única evidencia del recorrido completo.
