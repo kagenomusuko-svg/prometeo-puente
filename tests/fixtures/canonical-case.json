@@ -152,9 +152,30 @@
   },
   "caseEvents": [
     {
-      "id": "event-canonical-001",
+      "id": "event-canonical-case-001",
       "caseId": "case-canonical-001",
       "sequence": 1,
+      "action": "create",
+      "objectType": "Case",
+      "objectId": "case-canonical-001",
+      "previousState": "none",
+      "resultingState": "draft",
+      "previousVersion": "none",
+      "resultingVersion": "1.0.0",
+      "occurredAt": "2026-09-28T18:01:00Z",
+      "reason": "Creación del expediente canónico.",
+      "provenance": {
+        "kind": "human",
+        "actorId": "analyst-canonical-001",
+        "recordedAt": "2026-09-28T18:01:00Z",
+        "sourceObjectId": "case-canonical-001",
+        "sourceVersion": "none"
+      }
+    },
+    {
+      "id": "event-canonical-001",
+      "caseId": "case-canonical-001",
+      "sequence": 2,
       "action": "confirm",
       "objectType": "ConfirmedModel",
       "objectId": "model-canonical-001",
