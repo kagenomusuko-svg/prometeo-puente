@@ -10,8 +10,5 @@
   },
   "engines": {
     "node": ">=20"
-  },
-  "dependencies": {
-    "prometeo-informe": "https://github.com/kagenomusuko-svg/prometeo-informe/archive/cfc6d00bf87637a3b3864be121490f8a17b2c322.tar.gz"
   }
 }

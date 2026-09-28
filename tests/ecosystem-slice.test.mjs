@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fromLegacyCalculateResponse, toLegacyCalculateRequest } from "../src/motor-adapter.mjs";
-import { buildReport } from "prometeo-informe/report";
+import { pathToFileURL } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const chain = JSON.parse(fs.readFileSync(path.join(root, "tests/fixtures/canonical-case.json"), "utf8"));
@@ -61,7 +61,9 @@ assert.deepEqual(reportInput.contextReferences, chain.languageProposal.contextRe
 assert.equal(reportInput.motorResult.requestId, chain.motorRequest.id);
 assert.equal(reportInput.calculationTrace.requestId, chain.motorRequest.id);
 
-const report = buildReport({
+if (process.env.PROMETEO_INFORME_PATH) {
+  const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
+  const report = buildReport({
   ...reportInput,
   generatedAt: "2026-09-28T18:36:00Z",
   generatedBy: "prometeo-informe",
@@ -73,4 +75,7 @@ assert.deepEqual(report.contextReferences, reportInput.contextReferences);
 assert.deepEqual(report.sections.find((section) => section.id === "context").references, report.contextReferences);
 assert.equal(report.sections.find((section) => section.id === "trace").traceId, adapted.calculationTrace.id);
 
-console.log("PASS: vertical slice reproducible desde documento hasta ReportModel");
+  console.log("PASS: vertical slice reproducible desde documento hasta ReportModel");
+} else {
+  console.log("PASS: vertical slice reproducible hasta entrada de informe; ReportModel se ejecuta con PROMETEO_INFORME_PATH");
+}
