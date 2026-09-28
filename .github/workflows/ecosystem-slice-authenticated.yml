@@ -27,6 +27,31 @@ jobs:
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeoproyeccion
 
+      - name: Checkout motor fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-motor-calculo
+          ref: 177c8aadeab04ab754a18d8130b48e428eb69772
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeomotor
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install motor
+        run: pip install -r prometeomotor/api/requirements.txt
+
+      - name: Start motor
+        run: |
+          uvicorn api.server:app --app-dir prometeomotor --host 127.0.0.1 --port 8000 > /tmp/prometeo-motor.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:8000/docs > /dev/null && break
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:8000/docs > /dev/null
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -37,4 +62,5 @@ jobs:
         env:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
           PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
+          PROMETEO_MOTOR_URL: http://127.0.0.1:8000/calculate
         run: npm run vertical-slice
