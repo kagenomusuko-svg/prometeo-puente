@@ -1,1 +1,13 @@
-{"name":"prometeo-puente","version":"0.1.0","private":false,"type":"module","scripts":{"test":"node tests/adapter.test.mjs && node tests/vertical-slice.test.mjs && node tests/motor-client.test.mjs && node tests/semantic-chain.test.mjs && node tests/full-vertical-slice.test.mjs"},"engines":{"node":">=20"}}
+{
+  "name": "prometeo-puente",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/adapter.test.mjs && node tests/vertical-slice.test.mjs && node tests/motor-client.test.mjs && node tests/semantic-chain.test.mjs && node tests/full-vertical-slice.test.mjs && node tests/contract-version.test.mjs",
+    "contract-version": "node tests/contract-version.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
