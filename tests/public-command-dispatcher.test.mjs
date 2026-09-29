@@ -13,10 +13,10 @@ const handlers = {
 
 const decision = await dispatchPublicCommand({
   ...base, operation: "record-analyst-decision",
-  payload: { action: "confirm", targetObjectId: "hypothesis-1", resultingObjectId: "model-1", resultingVersion: "1.0.0" },
+  payload: { decision: { action: "confirm", targetObjectId: "hypothesis-1", resultingObjectId: "model-1", resultingVersion: "1.0.0" } },
 }, { handlers });
 assert.deepEqual(decision, { accepted: true, decisionId: "decision-1" });
-assert.equal(calls[0].payload.resultingObjectId, "model-1");
+assert.equal(calls[0].payload.decision.resultingObjectId, "model-1");
 
 const dispatcher = createPublicCommandDispatcher(handlers);
 const calculation = await dispatcher({
@@ -29,7 +29,7 @@ await assert.rejects(
   () => dispatchPublicCommand({
     ...base, operation: "record-analyst-decision", actorId: "prometeo-lenguaje",
     provenance: { kind: "language-agent", actorId: "prometeo-lenguaje", recordedAt: base.occurredAt },
-    payload: { action: "confirm", targetObjectId: "h", resultingObjectId: "m", resultingVersion: "1.0.0" },
+    payload: { decision: { action: "confirm", targetObjectId: "h", resultingObjectId: "m", resultingVersion: "1.0.0" } },
   }, { handlers }),
   (error) => error instanceof BridgeCommandError && error.code === "NON_HUMAN_DECISION",
 );
