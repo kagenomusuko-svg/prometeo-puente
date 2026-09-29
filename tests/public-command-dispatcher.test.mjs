@@ -35,7 +35,7 @@ await assert.rejects(
 );
 
 await assert.rejects(
-  () => dispatchPublicCommand({ ...base, operation: "request-calculation", payload: { result: [] } }, { handlers }),
+  () => dispatchPublicCommand({ ...base, operation: "request-calculation", payload: { modelId: "model-1", result: [] } }, { handlers }),
   (error) => error instanceof BridgeCommandError && error.code === "CALCULATION_OUTPUT_FORBIDDEN",
 );
 
