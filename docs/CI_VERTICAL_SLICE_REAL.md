@@ -23,6 +23,13 @@ Debe permitir leer los repositorios privados o restringidos que el workflow fija
 
 El token no se escribe en archivos ni se imprime en logs.
 
+## Revisiones relevantes de contexto y lenguaje
+
+- `prometeo-contexto@199bd93f9c5680742606d5861d6f70bc12dd8a01`
+- `prometeo-lenguaje@319b88fe00d25cfe251614a3fb548bde8ebbfd81`
+
+Estas revisiones incluyen lectura contextual canónica y la prueba de integración de la frontera lingüística.
+
 ## Qué ejecuta
 
 El workflow:
