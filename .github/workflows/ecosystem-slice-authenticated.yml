@@ -12,13 +12,47 @@ jobs:
     steps:
       - name: Checkout puente
         uses: actions/checkout@v4
-      - name: Checkout ingesta fijada\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-ingesta\n          ref: a6d887aa6e879573281b46ff60df420f0c6a53c9\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeoingesta\n      - name: Checkout contexto fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-contexto\n          ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeocontexto\n      - name: Checkout lenguaje fijado\n        uses: actions/checkout@v4\n        with:\n          repository: kagenomusuko-svg/prometeo-lenguaje\n          ref: 181249d721199ddafe495677a46bc01d6cc05b0f\n          token: ${{ secrets.PROMETEO_READ_TOKEN }}\n          path: prometeolenguaje\n      - name: Checkout informe fijado
+
+      - name: Checkout ingesta fijada
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-ingesta
+          ref: a6d887aa6e879573281b46ff60df420f0c6a53c9
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeosingesta
+
+      - name: Checkout contexto fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-contexto
+          ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeocontexto
+
+      - name: Checkout lenguaje fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-lenguaje
+          ref: ed9e63ddbaca699db5bd6b3c4ea121e98f8d9cae
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeolenguaje
+
+      - name: Checkout esquema fijado
+        uses: actions/checkout@v4
+        with:
+          repository: kagenomusuko-svg/prometeo-esquema
+          ref: 5f8dc0e9387e59b82fb0b28424ed76bb612af520
+          token: ${{ secrets.PROMETEO_READ_TOKEN }}
+          path: prometeoesquema
+
+      - name: Checkout informe fijado
         uses: actions/checkout@v4
         with:
           repository: kagenomusuko-svg/prometeo-informe
           ref: 0ecc97612efe9a0bd67a3edfeb7733e721a30597
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeoinforme
+
       - name: Checkout caso fijado
         uses: actions/checkout@v4
         with:
@@ -64,19 +98,31 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Install esquema
+        working-directory: prometeoesquema
+        run: npm install
+
+      - name: Validate contratos
+        working-directory: prometeoesquema
+        run: npm test
+
       - name: Install puente
         run: npm install
+
       - name: Execute full vertical slice
         env:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
-          PROMETEO_CASO_PATH: ${{ github.workspace }}/prometeocaso/src/aggregate.mjs\n          PROMETEO_CASO_STORE_PATH: ${{ github.workspace }}/prometeocaso/src/event-store.mjs
+          PROMETEO_CASO_PATH: ${{ github.workspace }}/prometeocaso/src/aggregate.mjs
+          PROMETEO_CASO_STORE_PATH: ${{ github.workspace }}/prometeocaso/src/event-store.mjs
           PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
           PROMETEO_MOTOR_URL: http://127.0.0.1:8000/calculate
         run: npm run vertical-slice
 
       - name: Execute generated vertical slice
         env:
-          PROMETEO_INGESTA_PATH: ${{ github.workspace }}/prometeoingesta/src/normalize.mjs\n          PROMETEO_CONTEXTO_PATH: ${{ github.workspace }}/prometeocontexto/src/query.mjs
+          PROMETEO_INGESTA_PATH: ${{ github.workspace }}/prometeosingesta/src/normalize.mjs
+          PROMETEO_CONTEXTO_PATH: ${{ github.workspace }}/prometeocontexto/src/query.mjs
           PROMETEO_LENGUAJE_PATH: ${{ github.workspace }}/prometeolenguaje/src/proposals.mjs
           PROMETEO_CASO_CONFIRMATION_PATH: ${{ github.workspace }}/prometeocaso/src/confirmation.mjs
           PROMETEO_CASO_TRANSITION_PATH: ${{ github.workspace }}/prometeocaso/src/transition.mjs
