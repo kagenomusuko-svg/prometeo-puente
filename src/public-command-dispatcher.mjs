@@ -50,10 +50,11 @@ function validateCommand(command) {
     if (command.provenance.kind !== "human" || command.actorId === "prometeo-lenguaje") {
       throw new BridgeCommandError("NON_HUMAN_DECISION", "only a human actor may record an analyst decision");
     }
-    requiredString(command.payload.action, "command.payload.action");
-    requiredString(command.payload.targetObjectId, "command.payload.targetObjectId");
-    requiredString(command.payload.resultingObjectId, "command.payload.resultingObjectId");
-    requiredString(command.payload.resultingVersion, "command.payload.resultingVersion");
+    object(command.payload.decision, "command.payload.decision");
+    requiredString(command.payload.decision.action, "command.payload.decision.action");
+    requiredString(command.payload.decision.targetObjectId, "command.payload.decision.targetObjectId");
+    requiredString(command.payload.decision.resultingObjectId, "command.payload.decision.resultingObjectId");
+    requiredString(command.payload.decision.resultingVersion, "command.payload.decision.resultingVersion");
   }
   if (command.operation === "request-calculation") {
     requiredString(command.payload.modelId, "command.payload.modelId");
