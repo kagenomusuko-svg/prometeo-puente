@@ -30,11 +30,22 @@ El workflow:
 1. obtiene las versiones fijadas de las islas;
 2. instala y valida `prometeo-esquema`;
 3. levanta `prometeo-motor-calculo` en `127.0.0.1:8000`;
-4. ejecuta el vertical slice existente;
-5. ejecuta el slice generado de ingesta, contexto y lenguaje;
-6. ejecuta `tests/real-vertical-slice.test.mjs` con `confirmModel`, `projectConfirmedModel`, el motor HTTP, `reconstructCaseAggregate` y `buildReport`.
+4. verifica la frontera entre propuestas lingüísticas y decisión humana;
+5. ejecuta el vertical slice existente;
+6. ejecuta el slice generado de ingesta, contexto y lenguaje;
+7. ejecuta `tests/real-vertical-slice.test.mjs` con `confirmModel`, `projectConfirmedModel`, el motor HTTP, `reconstructCaseAggregate` y `buildReport`.
 
 La prueba real no utiliza resultados simulados. Si se ejecuta fuera de este workflow sin las variables de servicio, se marca como `SKIP`; dentro de este workflow todas las rutas y la URL del motor están definidas, por lo que debe ejecutarse realmente.
+
+## Runtime de GitHub Actions
+
+Las actions oficiales utilizan:
+
+- `actions/checkout@v7`;
+- `actions/setup-node@v7`;
+- `actions/setup-python@v7`.
+
+El runtime del proyecto permanece en Node.js 20 o superior. La actualización sólo afecta el runtime interno de las actions y elimina la advertencia de deprecación de Node.js 20 emitida por GitHub.
 
 ## Ejecución
 
