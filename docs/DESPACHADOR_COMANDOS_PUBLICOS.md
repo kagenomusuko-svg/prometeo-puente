@@ -13,6 +13,26 @@
 
 El despachador no contiene reglas de dominio, no persiste eventos y no calcula. Los handlers inyectados conservan la responsabilidad de ejecutar cada operación mediante el componente autorizado.
 
+## Contrato de decisión
+
+La operación `record-analyst-decision` recibe la decisión dentro de `payload.decision`. El sobre conserva la metainformación de auditoría en su nivel superior y la decisión contiene únicamente la transición que será delegada:
+
+```json
+{
+  "operation": "record-analyst-decision",
+  "payload": {
+    "decision": {
+      "action": "confirm",
+      "targetObjectId": "hypothesis-1",
+      "resultingObjectId": "model-1",
+      "resultingVersion": "1.0.0"
+    }
+  }
+}
+```
+
+Esta forma coincide con el adaptador de `prometeo-sitio` y evita que la frontera mezcle la orden pública con su auditoría.
+
 ## Uso
 
 `dispatchPublicCommand(command, { handlers })` valida y entrega al handler correspondiente una copia del payload.
