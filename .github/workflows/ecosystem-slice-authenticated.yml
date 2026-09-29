@@ -131,3 +131,12 @@ jobs:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
           PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
         run: npm run generated-slice
+
+      - name: Execute real integrated vertical slice
+        env:
+          PROMETEO_CASO_PATH: ${{ github.workspace }}/prometeocaso/src/aggregate.mjs
+          PROMETEO_CASO_CONFIRMATION_PATH: ${{ github.workspace }}/prometeocaso/src/confirmation.mjs
+          PROMETEO_PROYECCION_PATH: ${{ github.workspace }}/prometeoproyeccion/src/project.mjs
+          PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
+          PROMETEO_MOTOR_URL: http://127.0.0.1:8000/calculate
+        run: node tests/real-vertical-slice.test.mjs
