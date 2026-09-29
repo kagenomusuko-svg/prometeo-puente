@@ -110,6 +110,12 @@ jobs:
       - name: Install puente
         run: npm install
 
+      - name: Verify language boundary
+        env:
+          PROMETEO_INGESTA_PATH: ${{ github.workspace }}/prometeosingesta/src/normalize.mjs
+          PROMETEO_LENGUAJE_PATH: ${{ github.workspace }}/prometeolenguaje/src/proposals.mjs
+        run: node tests/language-boundary.test.mjs
+
       - name: Execute full vertical slice
         env:
           PROMETEO_INFORME_PATH: ${{ github.workspace }}/prometeoinforme/src/report.mjs
