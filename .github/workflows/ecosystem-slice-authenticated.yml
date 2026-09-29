@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-lenguaje
-          ref: ed9e63ddbaca699db5bd6b3c4ea121e98f8d9cae
+          ref: 54b361b2da6f2248eae4d6f78771879fa4c002e0
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeolenguaje
 
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-caso
-          ref: 31ef2e4a1d7e8149b83c575b9918455f5e3cab34
+          ref: bcd0018cad31c3730e6f4e0adef8eb32254e2d42
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeocaso
 
@@ -115,6 +115,14 @@ jobs:
           PROMETEO_INGESTA_PATH: ${{ github.workspace }}/prometeosingesta/src/normalize.mjs
           PROMETEO_LENGUAJE_PATH: ${{ github.workspace }}/prometeolenguaje/src/proposals.mjs
         run: node tests/language-boundary.test.mjs
+
+      - name: Verify adversarial language boundary
+        working-directory: prometeolenguaje
+        run: node tests/adversarial-boundary.test.mjs
+
+      - name: Verify human authority boundary
+        working-directory: prometeocaso
+        run: node tests/adversarial-confirmation.test.mjs
 
       - name: Execute full vertical slice
         env:
