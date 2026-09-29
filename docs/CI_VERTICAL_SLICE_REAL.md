@@ -25,8 +25,8 @@ El token no se escribe en archivos ni se imprime en logs.
 
 ## Revisiones relevantes de contexto y lenguaje
 
-- `prometeo-contexto@199bd93f9c5680742606d5861d6f70bc12dd8a01`
-- `prometeo-lenguaje@319b88fe00d25cfe251614a3fb548bde8ebbfd81`
+- `prometeo-contexto@265111dfb5981560504a612cd2952b47a6a9e21b`
+- `prometeo-lenguaje@99c94bc58c4ccc55ca1157f30820df120b54d61a`
 
 Estas revisiones incluyen lectura contextual canónica y la prueba de integración de la frontera lingüística.
 
