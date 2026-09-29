@@ -15,7 +15,11 @@ if (!process.env.PROMETEO_PROYECCION_PATH || !process.env.PROMETEO_INFORME_PATH 
 
 const { projectConfirmedModel } = await import(pathToFileURL(process.env.PROMETEO_PROYECCION_PATH).href);
 const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
-const { reconstructCaseAggregate } = await import(pathToFileURL(process.env.PROMETEO_CASO_PATH).href);\nconst { createCaseEventStore } = await import(pathToFileURL(process.env.PROMETEO_CASO_STORE_PATH).href);\nconst eventStore = createCaseEventStore(chain.caseEvents);\nconst storedCaseEvents = eventStore.read(chain.sourceDocument.caseId);\nassert.deepEqual(storedCaseEvents, chain.caseEvents);
+const { reconstructCaseAggregate } = await import(pathToFileURL(process.env.PROMETEO_CASO_PATH).href);
+const { createCaseEventStore } = await import(pathToFileURL(process.env.PROMETEO_CASO_STORE_PATH).href);
+const eventStore = createCaseEventStore(chain.caseEvents);
+const storedCaseEvents = eventStore.read(chain.sourceDocument.caseId);
+assert.deepEqual(storedCaseEvents, chain.caseEvents);
 
 const projectedRequest = projectConfirmedModel({
   confirmedModel: chain.confirmedModel,
