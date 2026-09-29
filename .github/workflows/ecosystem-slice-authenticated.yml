@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout puente
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout ingesta fijada
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-ingesta
           ref: a6d887aa6e879573281b46ff60df420f0c6a53c9
@@ -22,7 +22,7 @@ jobs:
           path: prometeosingesta
 
       - name: Checkout contexto fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-contexto
           ref: 6a6223787e3dd4fe94046b7b234cf5981a296f0a
@@ -30,7 +30,7 @@ jobs:
           path: prometeocontexto
 
       - name: Checkout lenguaje fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-lenguaje
           ref: ed9e63ddbaca699db5bd6b3c4ea121e98f8d9cae
@@ -38,7 +38,7 @@ jobs:
           path: prometeolenguaje
 
       - name: Checkout esquema fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-esquema
           ref: 5f8dc0e9387e59b82fb0b28424ed76bb612af520
@@ -46,7 +46,7 @@ jobs:
           path: prometeoesquema
 
       - name: Checkout informe fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-informe
           ref: 0ecc97612efe9a0bd67a3edfeb7733e721a30597
@@ -54,7 +54,7 @@ jobs:
           path: prometeoinforme
 
       - name: Checkout caso fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-caso
           ref: 31ef2e4a1d7e8149b83c575b9918455f5e3cab34
@@ -62,7 +62,7 @@ jobs:
           path: prometeocaso
 
       - name: Checkout proyección fijada
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-proyeccion
           ref: fbd8ae4efdd9e2c0731d722b7c974fb7b692dc3d
@@ -70,7 +70,7 @@ jobs:
           path: prometeoproyeccion
 
       - name: Checkout motor fijado
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-motor-calculo
           ref: 177c8aadeab04ab754a18d8130b48e428eb69772
@@ -78,7 +78,7 @@ jobs:
           path: prometeomotor
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -95,7 +95,7 @@ jobs:
           curl -sf http://127.0.0.1:8000/docs > /dev/null
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 20
 
