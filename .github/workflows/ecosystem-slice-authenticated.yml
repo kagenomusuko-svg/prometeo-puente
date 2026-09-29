@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-contexto
-          ref: 199bd93f9c5680742606d5861d6f70bc12dd8a01
+          ref: 265111dfb5981560504a612cd2952b47a6a9e21b
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeocontexto
 
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: kagenomusuko-svg/prometeo-lenguaje
-          ref: 319b88fe00d25cfe251614a3fb548bde8ebbfd81
+          ref: 99c94bc58c4ccc55ca1157f30820df120b54d61a
           token: ${{ secrets.PROMETEO_READ_TOKEN }}
           path: prometeolenguaje
 
