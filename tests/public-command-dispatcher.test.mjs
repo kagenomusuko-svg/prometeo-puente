@@ -25,7 +25,7 @@ const calculation = await dispatcher({
 }, { handlers });
 assert.equal(calculation.requestId, "request-1");
 
-assert.throws(
+await assert.rejects(
   () => dispatchPublicCommand({
     ...base, operation: "record-analyst-decision", actorId: "prometeo-lenguaje",
     provenance: { kind: "language-agent", actorId: "prometeo-lenguaje", recordedAt: base.occurredAt },
@@ -34,12 +34,12 @@ assert.throws(
   (error) => error instanceof BridgeCommandError && error.code === "NON_HUMAN_DECISION",
 );
 
-assert.throws(
+await assert.rejects(
   () => dispatchPublicCommand({ ...base, operation: "request-calculation", payload: { result: [] } }, { handlers }),
   (error) => error instanceof BridgeCommandError && error.code === "CALCULATION_OUTPUT_FORBIDDEN",
 );
 
-assert.throws(
+await assert.rejects(
   () => dispatchPublicCommand({ ...base, operation: "request-report", payload: {} }, { handlers }),
   (error) => error instanceof BridgeCommandError && error.code === "MISSING_HANDLER",
 );
