@@ -22,7 +22,12 @@ if (requiredEnvironment.some((name) => !process.env[name])) {
     fs.readFileSync(path.join(root, "tests/fixtures/canonical-case.json"), "utf8"),
   );
 
-  const { confirmModel } = await import(pathToFileURL(process.env.PROMETEO_CASO_PATH).href);
+  const aggregatePath = process.env.PROMETEO_CASO_PATH;
+  const confirmationPath = process.env.PROMETEO_CASO_CONFIRMATION_PATH
+    ?? aggregatePath.replace(/aggregate\.mjs$/, "confirmation.mjs");
+
+  const { confirmModel } = await import(pathToFileURL(confirmationPath).href);
+  const { reconstructCaseAggregate } = await import(pathToFileURL(aggregatePath).href);
   const { projectConfirmedModel } = await import(pathToFileURL(process.env.PROMETEO_PROYECCION_PATH).href);
   const { buildReport } = await import(pathToFileURL(process.env.PROMETEO_INFORME_PATH).href);
 
@@ -58,10 +63,6 @@ if (requiredEnvironment.some((name) => !process.env[name])) {
     motorVersion: process.env.PROMETEO_MOTOR_VERSION ?? "prometeo-motor-calculo@http",
     calculatedAt: process.env.PROMETEO_CALCULATED_AT ?? "2026-09-29T00:00:00Z",
   });
-
-  const { reconstructCaseAggregate } = await import(
-    pathToFileURL(process.env.PROMETEO_CASO_PATH.replace(/confirmation\.mjs$/, "aggregate.mjs")).href
-  );
 
   const caseReduction = reconstructCaseAggregate(chain.caseEvents);
   const report = buildReport({
